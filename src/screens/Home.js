@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { Title } from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Header from '../components/Header';
 
 function Home(props) {
@@ -14,10 +15,12 @@ function Home(props) {
         icon: 'loading...',
     });
 
-    const getWeather = () => {
-        let MyCity;
-        const { city } = props.route.params;
-        MyCity = city;
+    const getWeather = async () => {
+        let MyCity = await AsyncStorage.getItem('newcity');
+        if (!MyCity) {
+            const { city } = props.route.params;
+            MyCity = city;
+        }
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${MyCity}&appid=5c7dd70a7accf4441abdd8513acb99b8&units=metrics`, {
             method: 'GET',
         })
@@ -31,6 +34,9 @@ function Home(props) {
                     desc: results.weather[0].description,
                     icon: results.weather[0].icon,
                 });
+            })
+            .catch(err => {
+                alert(err.message);
             });
     };
 

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { TextInput, Button, Card } from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Header from '../components/Header';
 
 function Search({navigation}) {
@@ -22,14 +23,16 @@ function Search({navigation}) {
             });
     };
 
-    const btnClick = () => {
+    const btnClick = async () => {
+        await AsyncStorage.setItem('newcity', city);
         navigation.navigate('Home', { city: city });
     };
 
-    const listClick = (cityName) => {
+    const listClick = async (cityName) => {
         setCity(cityName);
+        await AsyncStorage.setItem('newcity', city);
         navigation.navigate('Home', { city: cityName });
-    }
+    };
 
     return (
         <View style={styles.container}>
