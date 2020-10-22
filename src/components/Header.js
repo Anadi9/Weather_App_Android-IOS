@@ -10,7 +10,7 @@ function Header({title}) {
   return (
       <Appbar.Header style={styles.appbar}>
       <Icon name="weather-partly-snowy-rainy" color="#fff" size={35} style={styles.logo} />
-          <LinearTextGradient style={styles.title} locations={[0, 1]} colors={['#00E5FF', '#76FF03']} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} >
+          <LinearTextGradient style={styles.title} locations={[0, 1]} colors={['#00E5FF', '#00C853']} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} >
               <Title>{title}</Title>
           </LinearTextGradient>
     </Appbar.Header>
@@ -19,7 +19,7 @@ function Header({title}) {
 
 const styles = StyleSheet.create({
     appbar: {
-        backgroundColor: '#263238',
+        backgroundColor: '#000',
         flexDirection: 'row',
         justifyContent: 'center',
     },
